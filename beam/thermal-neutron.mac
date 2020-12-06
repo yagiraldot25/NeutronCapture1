@@ -1,0 +1,8 @@
+# Beam file for NP1
+# 
+/gps/ene/type user
+#/gps/ene/type mono 
+#/gps/ene/ 10 eV
+/gps/hist/type energy
+/gps/hist/file beam/thermal-neutron-therapy-spectrum.dat
+/gps/hist/inter Log

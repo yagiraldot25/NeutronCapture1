@@ -1,0 +1,93 @@
+# Macro file for N1
+#
+
+##################### G4State_PreInit ###################
+
+# ================== Analysis settings ==================
+
+# Analysis parameters
+/analysis/setFileName data/100ug_ml
+/analysis/setActivation true
+
+# Switch on/off histos
+/analysis/setHistoDirName histograms
+#/analysis/h1/setActivationToAll true
+
+# KineticEnergyAtVertex
+/analysis/h1/setActivation 0 true
+
+# TotalPDD
+/analysis/h1/setActivation 1 true
+
+# BoronPDD
+/analysis/h1/setActivation 2 true
+
+# AlphaKineticEnergyAtVertex
+/analysis/h1/setActivation 3 true
+
+# Li7KineticEnergyAtVertex
+/analysis/h1/setActivation 4 true
+
+# Switch on/off ntupling
+/analysis/setNtupleDirName ntuples
+/analysis/ntuple/setActivationToAll true
+
+# SecondariesProduction
+#/analysis/ntuple/setActivation 0 true
+
+# Source 
+#/analysis/ntuple/setActivation 1 true
+
+################## Kernel initialization ################
+
+/run/initialize
+
+#####################  G4State_Idle #####################
+
+# ================== Verbose settings ==================
+
+/analysis/verbose 0
+/control/verbose 0
+/process/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+# =================== Physics settings ==================
+
+#/process/em/fluo true
+#/process/em/auger true
+#/process/em/augerCascade true
+#/process/em/pixe true
+#/process/em/deexcitationIgnoreCut true
+#/process/em/lowestElectronEnergy 0 eV
+/process/em/printParameters
+
+# ==================== Phantom settings ====================
+
+# Set concentration
+/N1/geometry/SetConcentration 100 ug/g
+/material/g4/printMaterial
+
+# ==================== Beam settings ====================
+
+# Fast Neutron Beam
+/gps/particle neutron
+/control/execute beam/conical-beam.mac
+#/control/execute beam/fast-neutron.mac
+
+# ================== Scoring settings ===================
+
+/score/create/cylinderMesh Mesh1
+/score/mesh/cylinderSize 100 150 mm
+/score/mesh/translate/xyz 0 0 150 mm
+/score/mesh/nBin 50 75 30 // rho z phi
+/score/quantity/energyDeposit eDep
+/score/close
+
+/score/create/boxMesh Mesh3
+/score/mesh/boxSize 100 100 150 mm
+/score/mesh/translate/xyz 0 0 150 mm
+/score/mesh/nBin 50 50 75 // x y z
+/score/quantity/energyDeposit eDep
+/score/close
